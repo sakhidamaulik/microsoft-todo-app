@@ -9,7 +9,7 @@ const theme = createMuiTheme({
           color: "#44474c",
           height: "100vh",
           backgroundColor: "#ffffff",
-          fontFamily: "Caveat, sans-serif, cursive",
+          fontFamily: "Times New Roman, Roboto, sans-serif, cursive", //Caveat
           fontWeight: 600,
           overflowY: "auto",
           WebkitFontSmoothing: "antialiased",
