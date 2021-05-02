@@ -1,8 +1,8 @@
-import { IProjectList } from "./../../models/ProjectList.Models";
 import {
   Action,
   ProjectListActionTypes,
   ProjectListActions,
+  IProjectListResponse,
 } from "./../actions/ProjectList.Actions";
 import { SagaIterator } from "redux-saga";
 import { call, put, takeLatest } from "redux-saga/effects";
@@ -12,10 +12,11 @@ function* GetProjectList(
   action: Action<ProjectListActionTypes.GET_PROJECTLIST, {}>
 ) {
   try {
-    const projectList: IProjectList[] = yield call(
+    const projectListResponse: IProjectListResponse = yield call(
       projectListService.getProjectList
     );
-    yield put(ProjectListActions.GetProjectListSuccess(projectList));
+
+    yield put(ProjectListActions.GetProjectListSuccess(projectListResponse));
   } catch (e) {
     yield put(ProjectListActions.GetProjectListFailure(e));
   }

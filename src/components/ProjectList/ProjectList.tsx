@@ -18,10 +18,9 @@ import { ProjectListActions } from '../../redux/actions/ProjectList.Actions';
 // const drawerWidth = 240;
 
 const ProjectList = () => {
-  const classes = useStyles()
+  const classes = useStyles();
   const dispatch = useDispatch();
   const projectList = useSelector(ProjectListSelectors.getProjectList);
-  console.log(projectList);
 
   useEffect(() => {
     dispatch(ProjectListActions.GetProjectList());
@@ -43,8 +42,8 @@ const ProjectList = () => {
           {projectList.map(list =>
             <ListItem button>
               <ListIcon />
-              <ListItemText>{list.title}</ListItemText>
-              <ListItemText>{list.count}</ListItemText>
+              <ListItemText primary={list.title} />
+              <ListItemText primary={list.count} />
             </ListItem>
           )}
         </List>

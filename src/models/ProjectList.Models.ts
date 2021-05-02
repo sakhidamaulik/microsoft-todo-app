@@ -1,7 +1,7 @@
 export enum LoadState {
   Initial,
   Loading,
-  LoadSuccessFul,
+  LoadSuccessFull,
   LoadFailed,
 }
 
