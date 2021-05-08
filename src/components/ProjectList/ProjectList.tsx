@@ -28,7 +28,12 @@ const ProjectList = () => {
 
   return (
     <div className={classes.root}>
-      <Drawer variant="permanent">
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.paper,
+        }}
+      >
         <List>
           {['My day', 'Important', 'Planned', 'Assigned to you', 'Tasks'].map((text, index) => (
             <ListItem button key={text}>
