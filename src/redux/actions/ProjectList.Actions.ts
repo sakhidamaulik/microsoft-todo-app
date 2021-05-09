@@ -19,6 +19,10 @@ export enum ProjectListActionTypes {
   GET_PROJECTLIST = "Get Projectlist",
   GET_PROJECTLIST_SUCCESS = "Get Projectlist Success",
   GET_PROJECTLIST_FAILURE = "Get Projectlist Failure",
+
+  CREATE_PROJECTLIST = "Create Projectlist",
+  CREATE_PROJECTLIST_SUCCESS = "Create Projectlist Success",
+  CREATE_PROJECTLIST_FAILURE = "Create Projectlist Failure",
 }
 
 export interface IProjectListResponse {
@@ -46,9 +50,37 @@ export const ProjectListActions = {
   ): Action<ProjectListActionTypes.GET_PROJECTLIST_FAILURE, Error> => {
     return createAction(ProjectListActionTypes.GET_PROJECTLIST_FAILURE, error);
   },
+
+  CreateProjectList: (
+    projectList: IProjectList
+  ): Action<ProjectListActionTypes.CREATE_PROJECTLIST, IProjectList> => {
+    return createAction(ProjectListActionTypes.CREATE_PROJECTLIST, projectList);
+  },
+  CreateProjectListSuccess: (
+    projectList: IProjectList
+  ): Action<
+    ProjectListActionTypes.CREATE_PROJECTLIST_SUCCESS,
+    IProjectList
+  > => {
+    return createAction(
+      ProjectListActionTypes.CREATE_PROJECTLIST_SUCCESS,
+      projectList
+    );
+  },
+  CreateProjectListFailure: (
+    error: Error
+  ): Action<ProjectListActionTypes.CREATE_PROJECTLIST_FAILURE, Error> => {
+    return createAction(
+      ProjectListActionTypes.CREATE_PROJECTLIST_FAILURE,
+      error
+    );
+  },
 };
 
 export type ProjectListActionAllTypes =
   | ReturnType<typeof ProjectListActions.GetProjectList>
   | ReturnType<typeof ProjectListActions.GetProjectListSuccess>
-  | ReturnType<typeof ProjectListActions.GetProjectListFailure>;
+  | ReturnType<typeof ProjectListActions.GetProjectListFailure>
+  | ReturnType<typeof ProjectListActions.CreateProjectList>
+  | ReturnType<typeof ProjectListActions.CreateProjectListSuccess>
+  | ReturnType<typeof ProjectListActions.CreateProjectListFailure>;
