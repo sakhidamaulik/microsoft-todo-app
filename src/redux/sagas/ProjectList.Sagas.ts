@@ -11,13 +11,11 @@ import { projectListService } from "../../services/ProjectList.Service";
 
 function* GetProjectList(
   action: Action<ProjectListActionTypes.GET_PROJECTLIST, {}>
-) {
+): SagaIterator {
   try {
-    const projectListResponse: IProjectListResponse = yield call(
-      projectListService.getProjectList
-    );
+    const projectList = yield call(projectListService.getProjectList);
 
-    yield put(ProjectListActions.GetProjectListSuccess(projectListResponse));
+    yield put(ProjectListActions.GetProjectListSuccess(projectList));
   } catch (e) {
     yield put(ProjectListActions.GetProjectListFailure(e));
   }

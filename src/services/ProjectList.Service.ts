@@ -5,10 +5,10 @@ import axios from "axios";
 const BASE_URL = "http://localhost:3004";
 
 export const projectListService = {
-  getProjectList: async (): Promise<IProjectListResponse> => {
+  getProjectList: async (): Promise<IProjectList[]> => {
     const url = `${BASE_URL}/projects`;
 
-    const response = await axios.get<IProjectListResponse>(url);
+    const response = await axios.get<IProjectList[]>(url);
 
     return response.data;
   },

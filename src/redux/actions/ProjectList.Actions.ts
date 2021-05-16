@@ -36,14 +36,11 @@ export const ProjectListActions = {
   },
 
   GetProjectListSuccess: (
-    projectListResponse: IProjectListResponse
-  ): Action<
-    ProjectListActionTypes.GET_PROJECTLIST_SUCCESS,
-    IProjectListResponse
-  > => {
+    projectList: IProjectList[]
+  ): Action<ProjectListActionTypes.GET_PROJECTLIST_SUCCESS, IProjectList[]> => {
     return createAction(
       ProjectListActionTypes.GET_PROJECTLIST_SUCCESS,
-      projectListResponse
+      projectList
     );
   },
 
