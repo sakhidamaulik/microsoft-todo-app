@@ -27,14 +27,9 @@ export function projectListReducer(
         projectListLoadState: LoadState.Loading,
       };
     case ProjectListActionTypes.GET_PROJECTLIST_SUCCESS: {
-      const newProjectList = action.payload.projectList.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
-
       return {
         ...state,
-        projectList: newProjectList,
+        projectList: action.payload.projectList,
         eTag: action.payload.eTag,
         projectListLoadState: LoadState.LoadSuccessFull,
       };

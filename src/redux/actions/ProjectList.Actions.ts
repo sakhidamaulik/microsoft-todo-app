@@ -34,6 +34,7 @@ export const ProjectListActions = {
   GetProjectList: (): Action<ProjectListActionTypes.GET_PROJECTLIST, {}> => {
     return createAction(ProjectListActionTypes.GET_PROJECTLIST, {});
   },
+
   GetProjectListSuccess: (
     projectListResponse: IProjectListResponse
   ): Action<
@@ -45,6 +46,7 @@ export const ProjectListActions = {
       projectListResponse
     );
   },
+
   GetProjectListFailure: (
     error: Error
   ): Action<ProjectListActionTypes.GET_PROJECTLIST_FAILURE, Error> => {

@@ -26,7 +26,6 @@ const NewProjectList: React.FC<INewProjectListProps> = (props: INewProjectListPr
         }}
         onKeyPress={event => {
           if (event.key === "Enter") {
-            console.log("ENTER PRESSED");
             onAddProjectList();
           }
         }}

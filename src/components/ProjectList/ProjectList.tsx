@@ -22,10 +22,11 @@ import NewProjectList from '../NewProjectList/NewProjectList';
 const ProjectList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  
+  const [newProjectListTitle, setNewProjectListTitle] = useState("");
 
   const projectList = useSelector(ProjectListSelectors.getProjectList);
-
-  const [newProjectListTitle, setNewProjectListTitle] = useState("");
+  console.log("ProjectList", projectList);
 
   useEffect(() => {
     dispatch(ProjectListActions.GetProjectList());
@@ -43,7 +44,6 @@ const ProjectList = () => {
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
-    console.log(projectList)
     dispatch(ProjectListActions.CreateProjectList(projectList));
   }, [dispatch, newProjectListTitle]);
 
@@ -68,7 +68,7 @@ const ProjectList = () => {
           <Divider />
           <List>
             {projectList.map(list =>
-              <ListItem button>
+              <ListItem button key={list.id}>
                 <ListIcon />
                 <ListItemText primary={list.title} />
                 <ListItemText primary={list.count} />
