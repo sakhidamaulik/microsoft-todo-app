@@ -91,7 +91,12 @@ const ProjectList = () => {
       </Drawer>
       <main>
         <div>
-          {selectedProjectListId && <TaskList projectListId={selectedProjectListId} />}
+          {selectedProjectListId
+            && <TaskList
+              projectListId={selectedProjectListId}
+              projectList={projectList}
+            />
+          }
         </div>
       </main>
     </div >
