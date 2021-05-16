@@ -8,7 +8,6 @@ import ListIcon from '@material-ui/icons/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { useSelector, useDispatch } from "react-redux";
-import Typography from '@material-ui/core/Typography';
 import { v4 as uuid } from "uuid";
 
 // import projectListJSON from '../../projectList';
@@ -18,15 +17,19 @@ import { IProjectList } from "../../models/ProjectList.Models";
 import ProjectListSelectors from '../../redux/selectors/ProjectList.Selectors';
 import { ProjectListActions } from '../../redux/actions/ProjectList.Actions';
 import NewProjectList from '../NewProjectList/NewProjectList';
+import TaskList from '../TaskList/TaskList';
 
 const ProjectList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
   const [newProjectListTitle, setNewProjectListTitle] = useState("");
+  const [selectedProjectListId, setSelectedProjectListId] = useState<String | undefined>(undefined);
 
   const projectList = useSelector(ProjectListSelectors.getProjectList);
-  console.log("ProjectList", projectList);
+  if (!selectedProjectListId && projectList.length > 0) {
+    setSelectedProjectListId(projectList[0].id);
+  }
 
   useEffect(() => {
     dispatch(ProjectListActions.GetProjectList());
@@ -68,7 +71,11 @@ const ProjectList = () => {
           <Divider />
           <List>
             {projectList.map(list =>
-              <ListItem button key={list.id}>
+              <ListItem
+                button
+                key={list.id}
+                onClick={() => setSelectedProjectListId(list.id)}
+              >
                 <ListIcon />
                 <ListItemText primary={list.title} />
                 <ListItemText primary={list.count} />
@@ -82,10 +89,11 @@ const ProjectList = () => {
           />
         </div>
       </Drawer>
-
-      <Typography paragraph>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita voluptates, sed, facilis debitis perferendis, nam illum non nulla aut voluptatum mollitia error cumque ex veritatis suscipit ea? Voluptas, odio incidunt.
-      </Typography>
+      <main>
+        <div>
+          {selectedProjectListId && <TaskList projectListId={selectedProjectListId} />}
+        </div>
+      </main>
     </div >
   )
 }
