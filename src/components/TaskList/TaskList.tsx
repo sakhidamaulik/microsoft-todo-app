@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Divider, Menu, MenuItem } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -7,8 +7,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import useStyles from './style'
 import { IProjectList } from '../../models/ProjectList.Models';
+import { ProjectListActions } from '../../redux/actions/ProjectList.Actions';
 interface ITaskListProps {
-  projectListId: String;
+  projectListId: string;
   projectList: IProjectList[],
 }
 
@@ -18,6 +19,8 @@ const TaskList: React.FC<ITaskListProps> = (
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const { projectListId, projectList } = props;
   const projectListTitle = projectList.find(item => item.id === projectListId);
 
@@ -28,6 +31,12 @@ const TaskList: React.FC<ITaskListProps> = (
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const onDeleteProjectList = useCallback((projectListId: string) => {
+    const action = ProjectListActions.DeleteProjectList(projectListId);
+    console.log("ACTION:", action)
+    dispatch(action);
+  }, [dispatch])
 
   return (
     <div className={classes.toolbar}>
@@ -51,7 +60,7 @@ const TaskList: React.FC<ITaskListProps> = (
               Rename List
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={() => onDeleteProjectList}>
               <DeleteIcon />
               Delete List
             </MenuItem>

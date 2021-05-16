@@ -24,7 +24,7 @@ const ProjectList = () => {
   const dispatch = useDispatch();
 
   const [newProjectListTitle, setNewProjectListTitle] = useState("");
-  const [selectedProjectListId, setSelectedProjectListId] = useState<String | undefined>(undefined);
+  const [selectedProjectListId, setSelectedProjectListId] = useState<string | undefined>(undefined);
 
   const projectList = useSelector(ProjectListSelectors.getProjectList);
   if (!selectedProjectListId && projectList.length > 0) {

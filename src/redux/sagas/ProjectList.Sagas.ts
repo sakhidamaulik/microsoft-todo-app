@@ -3,7 +3,6 @@ import {
   Action,
   ProjectListActionTypes,
   ProjectListActions,
-  IProjectListResponse,
 } from "./../actions/ProjectList.Actions";
 import { SagaIterator } from "redux-saga";
 import { call, put, takeLatest, takeEvery } from "redux-saga/effects";

@@ -23,6 +23,10 @@ export enum ProjectListActionTypes {
   CREATE_PROJECTLIST = "Create Projectlist",
   CREATE_PROJECTLIST_SUCCESS = "Create Projectlist Success",
   CREATE_PROJECTLIST_FAILURE = "Create Projectlist Failure",
+
+  DELETE_PROJECTLIST = "Delete Projectlist",
+  DELETE_PROJECTLIST_SUCCESS = "Delete Projectlist Success",
+  DELETE_PROJECTLIST_FAILURE = "Delete Projectlist Failure",
 }
 
 export interface IProjectListResponse {
@@ -34,7 +38,6 @@ export const ProjectListActions = {
   GetProjectList: (): Action<ProjectListActionTypes.GET_PROJECTLIST, {}> => {
     return createAction(ProjectListActionTypes.GET_PROJECTLIST, {});
   },
-
   GetProjectListSuccess: (
     projectList: IProjectList[]
   ): Action<ProjectListActionTypes.GET_PROJECTLIST_SUCCESS, IProjectList[]> => {
@@ -43,7 +46,6 @@ export const ProjectListActions = {
       projectList
     );
   },
-
   GetProjectListFailure: (
     error: Error
   ): Action<ProjectListActionTypes.GET_PROJECTLIST_FAILURE, Error> => {
@@ -74,6 +76,20 @@ export const ProjectListActions = {
       error
     );
   },
+
+  DeleteProjectList: (
+    id: string
+  ): Action<ProjectListActionTypes.DELETE_PROJECTLIST, string> => {
+    return createAction(ProjectListActionTypes.DELETE_PROJECTLIST, id);
+  },
+  DeleteProjectListSuccess: (
+    id: string
+  ): Action<ProjectListActionTypes.DELETE_PROJECTLIST_SUCCESS, string> =>
+    createAction(ProjectListActionTypes.DELETE_PROJECTLIST_SUCCESS, id),
+  DeleteProjectListFailure: (
+    error: Error
+  ): Action<ProjectListActionTypes.DELETE_PROJECTLIST_FAILURE, Error> =>
+    createAction(ProjectListActionTypes.DELETE_PROJECTLIST_FAILURE, error),
 };
 
 export type ProjectListActionAllTypes =
@@ -82,4 +98,7 @@ export type ProjectListActionAllTypes =
   | ReturnType<typeof ProjectListActions.GetProjectListFailure>
   | ReturnType<typeof ProjectListActions.CreateProjectList>
   | ReturnType<typeof ProjectListActions.CreateProjectListSuccess>
-  | ReturnType<typeof ProjectListActions.CreateProjectListFailure>;
+  | ReturnType<typeof ProjectListActions.CreateProjectListFailure>
+  | ReturnType<typeof ProjectListActions.DeleteProjectList>
+  | ReturnType<typeof ProjectListActions.DeleteProjectListSuccess>
+  | ReturnType<typeof ProjectListActions.DeleteProjectListFailure>;
