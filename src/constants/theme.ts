@@ -1,6 +1,11 @@
+import { unstable_createMuiStrictModeTheme } from "@material-ui/core";
 import { createMuiTheme } from "@material-ui/core/styles";
+const createTheme =
+  process.env.NODE_ENV === "production"
+    ? createMuiTheme
+    : unstable_createMuiStrictModeTheme;
 
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiCssBaseline: {
       "@global": {
