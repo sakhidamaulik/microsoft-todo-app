@@ -54,6 +54,26 @@ export function projectListReducer(
         ...state,
         projectListLoadState: LoadState.LoadFailed,
       };
+    case ProjectListActionTypes.DELETE_PROJECTLIST:
+      return {
+        ...state,
+        projectListLoadState: LoadState.Loading,
+      };
+    case ProjectListActionTypes.DELETE_PROJECTLIST_SUCCESS: {
+      const newProjectList = state.projectList.filter(
+        (list) => list.id != action.payload
+      );
+      return {
+        ...state,
+        projectList: newProjectList,
+        projectListLoadState: LoadState.LoadSuccessFull,
+      };
+    }
+    case ProjectListActionTypes.CREATE_PROJECTLIST_FAILURE:
+      return {
+        ...state,
+        projectListLoadState: LoadState.LoadFailed,
+      };
     default:
       return state;
   }

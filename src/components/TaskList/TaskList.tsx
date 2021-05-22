@@ -60,7 +60,7 @@ const TaskList: React.FC<ITaskListProps> = (
               Rename List
             </MenuItem>
             <Divider />
-            <MenuItem onClick={() => onDeleteProjectList}>
+            <MenuItem onClick={() => onDeleteProjectList(projectListId)}>
               <DeleteIcon />
               Delete List
             </MenuItem>

@@ -20,4 +20,9 @@ export const projectListService = {
 
     return response.data;
   },
+  deleteProjectList: async (projectListId: string): Promise<void> => {
+    const url = `${BASE_URL}/projects/${projectListId}`;
+
+    return await axios.delete(url);
+  },
 };
