@@ -74,6 +74,39 @@ export function projectListReducer(
         ...state,
         projectListLoadState: LoadState.LoadFailed,
       };
+
+    case ProjectListActionTypes.UPDATE_PROJECTLIST:
+      return {
+        ...state,
+        projectListLoadState: LoadState.Loading,
+      };
+    case ProjectListActionTypes.UPDATE_PROJECTLIST_SUCCESS: {
+      const index = state.projectList.findIndex(
+        (list) => list.id === action.payload.id
+      );
+      let newProjectList: IProjectList[] = [];
+      if (index >= 0) {
+        // state.projectList.splice(index, 1, action.payload);
+        newProjectList = [
+          ...state.projectList.slice(0, index),
+          action.payload,
+          ...state.projectList.slice(index + 1),
+        ];
+      } else {
+        newProjectList = [action.payload, ...state.projectList];
+      }
+      return {
+        ...state,
+        projectList: newProjectList,
+        projectListLoadState: LoadState.LoadSuccessFull,
+      };
+    }
+    case ProjectListActionTypes.UPDATE_PROJECTLIST_FAILURE:
+      return {
+        ...state,
+        projectListLoadState: LoadState.LoadFailed,
+      };
+
     default:
       return state;
   }

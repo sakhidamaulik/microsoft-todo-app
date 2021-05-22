@@ -45,8 +45,23 @@ function* DeleteProjectList(
   }
 }
 
+function* UpdateProjectList(
+  action: Action<ProjectListActionTypes.UPDATE_PROJECTLIST, IProjectList>
+): SagaIterator {
+  try {
+    const projectListResult = yield call(
+      projectListService.updateProjectList,
+      action.payload
+    );
+    yield put(ProjectListActions.UpdateProjectListSuccess(projectListResult));
+  } catch (e) {
+    yield put(ProjectListActions.UpdateProjectListFailure(e));
+  }
+}
+
 export function* WatchProjectListSagas(): SagaIterator {
   yield takeEvery(ProjectListActionTypes.CREATE_PROJECTLIST, CreateProjectList);
   yield takeLatest(ProjectListActionTypes.GET_PROJECTLIST, GetProjectList);
   yield takeEvery(ProjectListActionTypes.DELETE_PROJECTLIST, DeleteProjectList);
+  yield takeEvery(ProjectListActionTypes.UPDATE_PROJECTLIST, UpdateProjectList);
 }

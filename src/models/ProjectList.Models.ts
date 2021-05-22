@@ -7,8 +7,8 @@ export enum LoadState {
 
 export interface IProjectList {
   id: string;
-  title: string;
+  title: string | undefined;
   count?: number;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

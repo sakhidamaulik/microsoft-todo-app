@@ -27,6 +27,10 @@ export enum ProjectListActionTypes {
   DELETE_PROJECTLIST = "Delete Projectlist",
   DELETE_PROJECTLIST_SUCCESS = "Delete Projectlist Success",
   DELETE_PROJECTLIST_FAILURE = "Delete Projectlist Failure",
+
+  UPDATE_PROJECTLIST = "Update Projectlist",
+  UPDATE_PROJECTLIST_SUCCESS = "Update Projectlist Success",
+  UPDATE_PROJECTLIST_FAILURE = "Update Projectlist Failure",
 }
 
 export interface IProjectListResponse {
@@ -90,6 +94,23 @@ export const ProjectListActions = {
     error: Error
   ): Action<ProjectListActionTypes.DELETE_PROJECTLIST_FAILURE, Error> =>
     createAction(ProjectListActionTypes.DELETE_PROJECTLIST_FAILURE, error),
+
+  UpdateProjectList: (
+    projectList: IProjectList
+  ): Action<ProjectListActionTypes.UPDATE_PROJECTLIST, IProjectList> => {
+    return createAction(ProjectListActionTypes.UPDATE_PROJECTLIST, projectList);
+  },
+  UpdateProjectListSuccess: (
+    projectList: IProjectList
+  ): Action<ProjectListActionTypes.UPDATE_PROJECTLIST_SUCCESS, IProjectList> =>
+    createAction(
+      ProjectListActionTypes.UPDATE_PROJECTLIST_SUCCESS,
+      projectList
+    ),
+  UpdateProjectListFailure: (
+    error: Error
+  ): Action<ProjectListActionTypes.UPDATE_PROJECTLIST_FAILURE, Error> =>
+    createAction(ProjectListActionTypes.UPDATE_PROJECTLIST_FAILURE, error),
 };
 
 export type ProjectListActionAllTypes =
@@ -101,4 +122,7 @@ export type ProjectListActionAllTypes =
   | ReturnType<typeof ProjectListActions.CreateProjectListFailure>
   | ReturnType<typeof ProjectListActions.DeleteProjectList>
   | ReturnType<typeof ProjectListActions.DeleteProjectListSuccess>
-  | ReturnType<typeof ProjectListActions.DeleteProjectListFailure>;
+  | ReturnType<typeof ProjectListActions.DeleteProjectListFailure>
+  | ReturnType<typeof ProjectListActions.UpdateProjectList>
+  | ReturnType<typeof ProjectListActions.UpdateProjectListSuccess>
+  | ReturnType<typeof ProjectListActions.UpdateProjectListFailure>;
