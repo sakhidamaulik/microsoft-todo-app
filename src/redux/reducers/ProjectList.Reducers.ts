@@ -61,7 +61,7 @@ export function projectListReducer(
       };
     case ProjectListActionTypes.DELETE_PROJECTLIST_SUCCESS: {
       const newProjectList = state.projectList.filter(
-        (list) => list.id != action.payload
+        (list) => list.id !== action.payload
       );
       return {
         ...state,
@@ -69,7 +69,7 @@ export function projectListReducer(
         projectListLoadState: LoadState.LoadSuccessFull,
       };
     }
-    case ProjectListActionTypes.CREATE_PROJECTLIST_FAILURE:
+    case ProjectListActionTypes.DELETE_PROJECTLIST_FAILURE:
       return {
         ...state,
         projectListLoadState: LoadState.LoadFailed,

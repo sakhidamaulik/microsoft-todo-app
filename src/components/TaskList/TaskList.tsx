@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback } from 'react';
+import { useDispatch } from "react-redux";
 import { Button, Divider, Menu, MenuItem } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import EditAttributesIcon from '@material-ui/icons/EditAttributes';
@@ -42,6 +42,7 @@ const TaskList: React.FC<ITaskListProps> = (
     <div className={classes.toolbar}>
       <div className={classes.toolbarTop}>
         <h2 className={classes.taskListTitle}><span>{projectListTitle?.title}</span></h2>
+
         <div>
           <Button onClick={handleClick}>
             <MoreHorizIcon className={classes.moreIcon} />

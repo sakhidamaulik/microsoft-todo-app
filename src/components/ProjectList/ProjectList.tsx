@@ -10,8 +10,6 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-// import projectListJSON from '../../projectList';
-
 import useStyles from './style'
 import { IProjectList } from "../../models/ProjectList.Models";
 import ProjectListSelectors from '../../redux/selectors/ProjectList.Selectors';
@@ -24,11 +22,11 @@ const ProjectList = () => {
   const dispatch = useDispatch();
 
   const [newProjectListTitle, setNewProjectListTitle] = useState("");
-  const [selectedProjectListId, setSelectedProjectListId] = useState<string | undefined>(undefined);
+  const [selectedProjectId, setSelectedProjectId] = useState<string | undefined>(undefined);
 
   const projectList = useSelector(ProjectListSelectors.getProjectList);
-  if (!selectedProjectListId && projectList.length > 0) {
-    setSelectedProjectListId(projectList[0].id);
+  if (!selectedProjectId && projectList.length > 0) {
+    setSelectedProjectId(projectList[0].id);
   }
 
   useEffect(() => {
@@ -41,14 +39,20 @@ const ProjectList = () => {
       console.error("ProjectListTitle should not be empty");
       return;
     }
+
     const projectList: IProjectList = {
       id: uuid(),
       title: projectListName,
       createdAt: new Date().toString(),
       updatedAt: new Date().toString(),
     };
+
     dispatch(ProjectListActions.CreateProjectList(projectList));
   }, [dispatch, newProjectListTitle]);
+
+  const _setSelectedProjectedId = useCallback((projectId: string) => {
+    return (_e: React.MouseEvent<HTMLElement>) => setSelectedProjectId(projectId);
+  }, [setSelectedProjectId]);
 
   return (
     <div className={classes.root}>
@@ -74,7 +78,7 @@ const ProjectList = () => {
               <ListItem
                 button
                 key={list.id}
-                onClick={() => setSelectedProjectListId(list.id)}
+                onClick={_setSelectedProjectedId(list.id)}
               >
                 <ListIcon />
                 <ListItemText primary={list.title} />
@@ -91,9 +95,9 @@ const ProjectList = () => {
       </Drawer>
       <main>
         <div>
-          {selectedProjectListId
+          {selectedProjectId
             && <TaskList
-              projectListId={selectedProjectListId}
+              projectListId={selectedProjectId}
               projectList={projectList}
             />
           }

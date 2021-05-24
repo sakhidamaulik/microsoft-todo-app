@@ -1,6 +1,7 @@
 import { IProjectList } from "./../models/ProjectList.Models";
-import { IProjectListResponse } from "./../redux/actions/ProjectList.Actions";
+
 import axios from "axios";
+// import { IProjectListResponse } from "./../redux/actions/ProjectList.Actions";
 
 const BASE_URL = "http://localhost:3004";
 
